@@ -1,2 +1,2 @@
 # USACO
-My code for previous USACO contests
+My code for previous USA Computing Olympiad (USACO)
