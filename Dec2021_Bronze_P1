@@ -1,0 +1,76 @@
+package usaco;
+//	A link to the problem: http://usaco.org/index.php?page=viewproblem2&cpid=1155
+import java.util.Scanner;
+//	This is a code that I wrote after the contest ended.
+//	During the contest I wrote a much slower algorithm that resulted in me getting 10/11 test cases.
+//	This algorithm is much faster and can complete the final test case.
+public class Dec2021_Bronze_P1 {
+	
+//	Note that instead of checking all the photos and counting the lonely ones, 
+//	we can just look at each individual cow and count the amount of times they've been the odd one out.
+	public static long Lonely_Photo() {
+//		I used long rather than int because the result of the final test case is larger than the
+//		capacity of the type int.
+		
+//		Here I define all the variables from the input
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		int cows=Integer.parseInt(line);
+		line=obj.nextLine();
+		char[] breeds=line.toCharArray();
+		long thrown_out=0;
+//		First, there is a loop to check each and every cow.
+		for(int i=0;i<cows;i++) {
+			int opposite_left=0;
+			int opposite_right=0;
+//		Now I have 2 for loops-one for each side of the cow. While it may seem that this takes n time,
+//		it actually takes much less-somewhere close to an average of 2-3 runs through each loop for each cow.
+//		In fact, the maximum amount of total runs through each loop is 4n. This is easily provable
+//		because each cow can only be an adjacent opposite cow to two other cows-one on the left and one on the right.
+//		So, while it may look like this algorithm runs in O(n*n) time, it actually runs in O(n) time.
+			for(int j=i-1;j>=0;j--) {
+				if(Opposite(breeds[i])==breeds[j]) {
+					opposite_left++;
+				}else {
+					break;
+				}
+			}
+			for(int j=i+1;j<cows;j++) {
+				if(Opposite(breeds[i])==breeds[j]) {
+					opposite_right++;
+				}else {
+					break;
+				}
+			}
+//		Finally there is an if statement followed by a formula to add the correct amount of photos
+//		to the total.
+			int opposite=opposite_left+opposite_right;
+			if(opposite>=2) {
+				thrown_out=thrown_out+((long)(opposite_left+1))*((long)(opposite_right+1))-3;
+//				You may notice that the above formula is actually incorrect in the cases where there are 
+//				adjacent opposite cows on one side, but not the other. In that case, a correct formula
+//				would be (left+1)*(right+1)-2. So, I instead just add one because -3+1=-2.
+				if(opposite_left==0 || opposite_right==0) {
+					thrown_out=thrown_out+1;
+				}
+
+			}
+			
+		}
+		
+		return thrown_out;
+	}
+//	This simply returns the opposite cow breed.
+	public static char Opposite(char input) {
+		if(input=='G') {
+			return 'H';
+		}else {
+			return 'G';
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Lonely_Photo());
+	}
+
+}
