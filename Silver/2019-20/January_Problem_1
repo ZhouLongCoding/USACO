@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -60,5 +61,5 @@ public class Jan2020_Silver_P1 {
 		// TODO Auto-generated method stub
 		Berries();
 	}
-
+	
 }
