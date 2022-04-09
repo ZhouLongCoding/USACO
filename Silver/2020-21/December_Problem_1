@@ -1,7 +1,7 @@
 
 import java.util.*;
 import java.io.*;
-public class Silver2020December {
+public class Dec2020_Silver_P1 {
 
 	public static int Cowntagion() {
 		int days=0;
