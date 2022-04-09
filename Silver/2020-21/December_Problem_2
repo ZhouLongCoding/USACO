@@ -1,0 +1,85 @@
+package usaco;
+import java.util.*;
+import java.io.*;
+public class Silver2020December {
+
+	public static long Rectangular_pasture() {
+		try {
+			long subsets=0;
+			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+			String line=br.readLine();
+			int cow=Integer.parseInt(line);
+			int[] x=new int[cow];
+			int[] y=new int[cow];
+			int[] cows=new int[cow];
+			for(int i=0;i<cow;i++) {
+				line=br.readLine();
+				String[] temp_str=line.split(" ");
+				x[i]=Integer.parseInt(temp_str[0]);
+				y[i]=Integer.parseInt(temp_str[1]);
+				cows[i]=i;
+
+			}
+			int[] x2=x.clone();
+			int[] y2=y.clone();
+			Arrays.sort(x2);
+			Arrays.sort(y2);
+			HashMap <Integer,Integer> x2tox=new HashMap<>();
+			HashMap <Integer,Integer> y2toy=new HashMap<>();
+			HashMap <Integer,Integer> ytox=new HashMap<>();
+			for(int i=0;i<cow;i++) {
+				x2tox.put(x2[i], i);
+				y2toy.put(y2[i], i);
+			}
+			for(int i=0;i<cow;i++) {
+				x[i]=x2tox.get(x[i]);
+				y[i]=y2toy.get(y[i]);
+				ytox.put(y[i], x[i]);
+			}
+			Arrays.sort(y);
+			for(int i=0;i<cow;i++) {
+				x[i]=ytox.get(y[i]);
+			}
+			int[][] sums=new int[cow+1][cow+1];
+			for(int i=0;i<cow;i++) {
+				sums[x[i]][y[i]]++;
+			}
+			for (int i=0;i<=cow;i++) {
+				for (int j=0;j<=cow;j++) {
+					if(i>0) {
+						sums[i][j]+=sums[i-1][j];
+					}
+					if(j>0) {
+						sums[i][j]+=sums[i][j-1];
+					}
+					if(i>0 && j>0) {
+						sums[i][j]-=sums[i-1][j-1];
+					}
+				}
+			}
+
+
+			for(int i=0;i<cow;i++) {
+				for(int j=i+1;j<cow;j++) {
+					subsets+=rectangle_counter(Math.min(x[i], x[j]), Math.max(x[i], x[j]), 1, Math.min(y[i], y[j]), sums)
+							* rectangle_counter(Math.min(x[i], x[j]), Math.max(x[i], x[j]), Math.max(y[i], y[j]), cow, sums);
+				}
+			}
+
+			return subsets;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public static int rectangle_counter(int x1,int x2,int y1,int y2,int[][] sums) {
+		return sums[x2][y2]-sums[x1-1][y2]-sums[x2][y1-1]+sums[x1-1][y1-1];
+	}
+
+	public static void main(String[] args) {
+		//		 TODO Auto-generated method stub
+		System.out.println(Rectangular_pasture());
+	}
+
+}
