@@ -1,1 +1,35 @@
+import java.util.*;
+public class Dec2020_Bronze_P1 {
 
+	public static int[] ABCs() {
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		String[] data=line.split(" ");
+		int[] data_set=new int[data.length];
+		for(int i=0;i<data.length;i++) {
+			data_set[i]=Integer.parseInt(data[i]);
+		}
+		Arrays.sort(data_set);
+
+		int a=data_set[0];
+		int b=data_set[1];
+		int c=0;
+		if(data_set[2]==a+b) {
+			c=data_set[3];
+		}else {
+			c=data_set[2];
+		}
+
+
+		int[] output= {a,b,c};
+		return output;
+	}
+
+	public static void main(String[] args) {
+		String[] output=dumb_In_A_Rut();
+		for(int i=0;i<output.length;i++) {
+			System.out.println(output[i]);
+		}
+	}
+
+}
