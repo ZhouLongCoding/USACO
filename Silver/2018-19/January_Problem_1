@@ -1,1 +1,44 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
+public class Jan2019_Silver_P1 {
+	
+	public static void Grass_Planting() {
+		try {
+			BufferedReader br=new BufferedReader(new FileReader("planting.in"));
+			BufferedWriter bw=new BufferedWriter(new FileWriter("planting.out"));
+			String line=br.readLine();
+			int fields=Integer.parseInt(line);
+			int[] each_field=new int[fields];
+			for(int i=0;i<fields-1;i++) {
+				line=br.readLine();
+				String[] temp=line.split(" ");
+				int first=Integer.parseInt(temp[0])-1;
+				int second=Integer.parseInt(temp[1])-1;
+				each_field[first]++;
+				each_field[second]++;
+			}
+			int largest=0;
+			for(int i=0;i<fields;i++) {
+				if(each_field[i]>largest) {
+					largest=each_field[i];
+				}
+			}
+			largest++;
+			bw.write(largest+"");
+			bw.write("\n");
+			bw.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Grass_Planting();
+	}
+
+}
