@@ -1,0 +1,67 @@
+import java.util.*;
+public class REAL_USACO {
+
+	public static int Air_Cow() {
+		//		ALL 10!
+		//		Variable definition starts here
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		int cows=Integer.parseInt(line);
+		line=obj.nextLine();
+		String[] optimal_temp_str=line.split(" ");
+		int[] optimal_temp=new int[optimal_temp_str.length];
+		for(int i=0;i<optimal_temp_str.length;i++) {
+			optimal_temp[i]=Integer.parseInt(optimal_temp_str[i]);
+		}
+		line=obj.nextLine();
+		String[] current_temp_str=line.split(" ");
+		int[] current_temp=new int[current_temp_str.length];
+		for(int i=0;i<current_temp_str.length;i++) {
+			current_temp[i]=Integer.parseInt(current_temp_str[i]);
+		}
+		int[] difference=new int[current_temp.length];
+		for(int i=0;i<current_temp.length;i++) {
+			difference[i]=optimal_temp[i]-current_temp[i];
+		}
+		//		Code starts here
+
+		return temp_changes(difference);
+
+	}
+
+	public static int temp_changes(int[] difference) {
+		int changes=0;
+		for(int i=0;i<difference.length;i++) {
+			while(difference[i]!=0) {
+				if(difference[i]>0) {
+					int j=i;
+					while(difference[j]>0) {
+						difference[j]--;
+						j++;
+						if(j==difference.length) {
+							break;
+						}
+					}
+					changes++;
+				}else {
+					int j=i;
+					while(difference[j]<0) {
+						difference[j]++;
+						j++;
+						if(j==difference.length) {
+							break;
+						}
+					}
+					changes++;
+				}
+
+			}
+		}
+		return changes;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Air_Cow());
+	}
+
+}
