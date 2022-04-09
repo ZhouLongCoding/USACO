@@ -1,1 +1,49 @@
+import java.util.*;
+public class Dec2020_Bronze_P2 {
+
+	public static int Daisy_Chains() {
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		int flowers=Integer.parseInt(line);
+		line=obj.nextLine();
+		String[] petals_str=line.split(" ");
+		int[] petals=new int[petals_str.length];
+		for(int i=0;i<petals.length;i++) {
+			petals[i]=Integer.parseInt(petals_str[i]);
+		}
+		int average_flowers=0;
+		for(int i=0;i<petals.length;i++) {
+			for(int j=i;j<petals.length;j++) {
+				average_flowers=average_flowers+Average_calculator(petals,i,j);
+			}
+		}
+
+		return average_flowers;
+	}
+
+	public static int Average_calculator(int[] petals,int i, int j) {
+		double sum=0;
+		for(int k=i;k<=j;k++) {
+			sum=sum+petals[k];
+		}
+		double average=sum/(j-i+1);
+		if((average%1)==0) {
+			int average_int=(int)average;
+			for(int k=i;k<=j;k++) {
+				if(petals[k]==average) {
+					return 1;
+				}
+			}
+			return 0;
+		}else {
+			return 0;
+		}
+	}
+
+
+	public static void main(String[] args) {
+			System.out.println(Daisy_Chains());
+	}
+
+}
 
