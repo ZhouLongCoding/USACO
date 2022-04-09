@@ -1,5 +1,5 @@
 import java.util.*;
-public class REAL_USACO {
+public class Dec2021_Bronze_P2 {
 
 	public static int Air_Cow() {
 		//		ALL 10!
