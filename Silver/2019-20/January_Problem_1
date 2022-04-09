@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Arrays;
+
+public class Jan2020_Silver_P1 {
+
+	public static void Berries() {
+		try {
+			BufferedReader br=new BufferedReader(new FileReader("berries.in"));
+			BufferedWriter bw=new BufferedWriter(new FileWriter("berries.out"));
+			String line=br.readLine();
+			String[] temp=line.split(" ");
+			int n=Integer.parseInt(temp[0]);
+			int k=Integer.parseInt(temp[1]);
+			int[] trees=new int[n];
+			line=br.readLine();
+			temp=line.split(" ");
+			for(int i=0;i<temp.length;i++) {
+				trees[i]=Integer.parseInt(temp[i]);
+			}
+			Arrays.sort(trees);
+			int out=0;
+			for(int i=1;i<trees[n-1];i++) {
+				int[] temp_trees=trees.clone();
+				int buckets_filled=0;
+				for(int j=0;j<trees.length;j++) {
+					buckets_filled+=temp_trees[j]/i;
+					temp_trees[j]=temp_trees[j]-i*(temp_trees[j]/i);
+				}
+				if(buckets_filled>=k/2) {
+					Arrays.sort(temp_trees);
+					int temp_out=0;
+					if(buckets_filled<k) {
+						int buckets_left=k-buckets_filled;
+						for(int j=temp_trees.length-1;j>temp_trees.length-1-buckets_left;j--) {
+							temp_out+=temp_trees[j];
+						}
+						temp_out+=i*(buckets_filled-k/2);
+					}else {
+						temp_out=i*k/2;
+					}
+					if(temp_out>out) {
+						out=temp_out;
+					}
+				}else {
+					break;
+				}
+			}
+			bw.write(out+"\n");
+			bw.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Berries();
+	}
+
+}
