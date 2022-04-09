@@ -1,5 +1,5 @@
 import java.util.*;
-public class  {
+public class Dec2021_Bronze_P3 {
 	public static int[] Walking_Home() {
 		//		
 		//		Variable Definitions
