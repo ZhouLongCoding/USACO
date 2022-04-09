@@ -1,1 +1,73 @@
+import java.util.*;
+public class Bronze2021Open {
+
+	public static int h_index(int[] input) {
+		Arrays.sort(input);
+		int i=0;
+		int max_h=0;
+		int index=input.length-1;
+		while(i<input.length) {
+			if(input[index]<max_h) {
+				break;
+			}
+			max_h++;
+			index--;
+			i++;
+		}
+		return max_h-1;
+	}
+	public static int potential(int[] input, int h_index) {
+		int possible_papers=0;
+		for(int i=input.length-1;i>=0;i--) {
+			if(input[i]<h_index) {
+				break;
+			}
+			possible_papers++;
+		}
+		return possible_papers;
+	}
+	public static int changes_needed(int[] input, int h_index) {
+		int possible=potential(input, h_index);
+		if(possible<=h_index) {
+			return Integer.MAX_VALUE;
+		}
+		int no_changes_needed=0;
+		int i=input.length-1;
+		while(input[i]>h_index) {
+			no_changes_needed++;
+			i--;
+		}
+		int changes_needed=h_index+1-no_changes_needed;
+
+		return changes_needed;
+	}
+	public static int Acowdemia_1() {
+		Scanner obj=new Scanner(System.in);
+		String line1=obj.nextLine();
+		String[] line1data=line1.split(" ");
+		int l=Integer.parseInt(line1data[1]);
+		String line2=obj.nextLine();
+		String[] data_set_str=line2.split(" ");
+		int[] data_set=new int[data_set_str.length];
+		for(int i=0;i<data_set_str.length;i++) {
+			data_set[i]=Integer.parseInt(data_set_str[i]);
+		}
+
+
+		int current_h=h_index(data_set);
+		int changes_needed=changes_needed(data_set, current_h);
+		if(changes_needed<=l) {
+			return current_h+1;
+		}else {
+			return current_h;
+		}
+
+
+	}
+
+  public static void main(String[] args) {
+		System.out.println(Acowdemia_1());
+	}
+
+}
 
