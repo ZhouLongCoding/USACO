@@ -1,7 +1,7 @@
 package usaco;
 import java.util.*;
 import java.io.*;
-public class Silver2020December {
+public class Dec2020_Silver_P2 {
 
 	public static long Rectangular_pasture() {
 		try {
