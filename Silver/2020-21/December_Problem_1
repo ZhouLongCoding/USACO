@@ -1,1 +1,38 @@
 
+import java.util.*;
+import java.io.*;
+public class Silver2020December {
+
+	public static int Cowntagion() {
+		int days=0;
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		int farms=Integer.parseInt(line);
+		int[] connections=new int[farms];
+		for(int i=1;i<farms;i++) {
+			line=obj.nextLine();
+			String[] temp=line.split(" ");
+			connections[Integer.parseInt(temp[0])-1]++;
+			connections[Integer.parseInt(temp[1])-1]++;
+		}
+		connections[0]++;
+		for(int i=0;i<connections.length;i++) {
+			int infected=1;
+			int duplications=0;
+			while(infected<connections[i]) {
+				infected=infected*2;
+				duplications++;
+			}
+			days=days+duplications;
+		}
+		days=days+farms-1;
+		return days;
+	}
+
+	public static void main(String[] args) {
+		//		 TODO Auto-generated method stub
+		System.out.println(Cowntagion());
+		
+	}
+
+}
