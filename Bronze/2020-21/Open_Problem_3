@@ -1,1 +1,79 @@
+import java.util.*;
+public class Bronze2021Open {
+  public static int Acowdemia_3() {
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		String[] line1=line.split(" ");
+		int n=Integer.parseInt(line1[0]);
+		int m=Integer.parseInt(line1[1]);
+		char[][] dataset=new char[n][m];
 
+		for(int i=0;i<n;i++) {
+			line=obj.nextLine();
+			dataset[i]=line.toCharArray();
+		}
+
+		return friendship_counter(dataset);
+	}
+
+	public static int friendship_counter(char[][] dataset) {
+		int friends=0;
+		HashSet<String> selected_pairs= new HashSet<String>();
+		for(int i=0;i<dataset.length;i++) {
+			for(int j=0;j<dataset[0].length;j++) {
+				if(dataset[i][j]==71) {
+					friends=friends+grass_counter(dataset,i,j,selected_pairs);	
+				}
+			}
+		}
+		friends=friends+selected_pairs.size();
+		return friends;
+	}
+	public static int grass_counter(char[][] dataset, int n, int m, HashSet<String> selected_pairs) {
+		int adjacent=0;
+		String temp_storage="";
+
+		
+		
+		if(n!=dataset.length-1) {
+			if(dataset[n+1][m]==67) {
+				adjacent++;
+				temp_storage=temp_storage+"("+(n+1)+","+m+")";
+			}
+		}
+		
+		if(m!=0) {
+			if(dataset[n][m-1]==67) {
+				adjacent++;
+				temp_storage=temp_storage+"("+n+","+(m-1)+")";
+			}
+		}
+		if(m!=dataset[0].length-1) {
+			if(dataset[n][m+1]==67) {
+				adjacent++;
+				temp_storage=temp_storage+"("+n+","+(m+1)+")";
+			}
+		}
+		if(n!=0) {
+			if(dataset[n-1][m]==67) {
+				adjacent++;
+				temp_storage=temp_storage+"("+(n-1)+","+m+")";
+			}
+		}
+		
+		
+		if(adjacent<2) {
+			return 0;
+		}else if(adjacent>2){
+			return 1;
+		}else {
+			selected_pairs.add(temp_storage);
+			return 0;
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Acowdemia_3());
+	}
+
+}
