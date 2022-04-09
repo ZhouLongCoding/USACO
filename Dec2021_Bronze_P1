@@ -1,9 +1,12 @@
 package usaco;
-//	A link to the problem: http://usaco.org/index.php?page=viewproblem2&cpid=1155
+//	USACO Bronze 2021 Dec Problem 1: 
+//	http://usaco.org/index.php?page=viewproblem2&cpid=1155
+
 import java.util.Scanner;
 //	This is a code that I wrote after the contest ended.
 //	During the contest I wrote a much slower algorithm that resulted in me getting 10/11 test cases.
 //	This algorithm is much faster and can complete the final test case.
+
 public class Dec2021_Bronze_P1 {
 	
 //	Note that instead of checking all the photos and counting the lonely ones, 
