@@ -1,4 +1,4 @@
-package usaco;
+
 import java.util.*;
 import java.io.*;
 public class Dec2020_Silver_P2 {
