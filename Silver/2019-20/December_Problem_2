@@ -1,6 +1,4 @@
 
-package usaco;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -8,7 +6,7 @@ import java.io.FileWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class Silver2019December {
+public class Dec2019_Silver_P1 {
 
 	public static void Milk_Visits_Groups() {
 		try {
