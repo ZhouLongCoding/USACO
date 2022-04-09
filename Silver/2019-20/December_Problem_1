@@ -1,14 +1,12 @@
-package usaco;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class Silver2019December {
+public class Dec2019_Silver_P1 {
 
 	public static void MooBuzz() {
 		try{
@@ -44,193 +42,9 @@ public class Silver2019December {
 		}
 
 	}
-
-	public static void Milk_Visits() {
-		try {
-			BufferedReader br=new BufferedReader(new FileReader("milkvisits.in"));
-			BufferedWriter bw=new BufferedWriter(new FileWriter("milkvisits.out"));
-			String line=br.readLine();
-			String[] temp=line.split(" ");
-			int n=Integer.parseInt(temp[0]);
-			int m=Integer.parseInt(temp[1]);
-			line=br.readLine();
-			char[] breeds=line.toCharArray();
-			ArrayList<Integer>[] paths=new ArrayList[n];
-			for(int i=0;i<n;i++) {
-				paths[i]=new ArrayList<>();
-			}
-			for(int i=0;i<n-1;i++) {
-				line=br.readLine();
-				temp=line.split(" ");
-				int first=Integer.parseInt(temp[0])-1;
-				int second=Integer.parseInt(temp[1])-1;
-				paths[first].add(second);
-				paths[second].add(first);
-			}
-
-			int[] g=new int[n];
-			int[] h=new int[n];
-			if(breeds[0]=='H') {
-				g[0]=0;
-				h[0]=1;
-			}else {
-				g[0]=1;
-				h[0]=0;
-			}
-			boolean[] gone_to=new boolean[n];
-			ArrayDeque<Integer> queue=new ArrayDeque<>();
-			queue.add(0);
-			while(queue.isEmpty()==false) {
-				int x=queue.pop();
-				for(int i : paths[x]) {
-					if(gone_to[i]==false) {
-						queue.add(i);
-					}else {
-						if(breeds[x]=='H') {
-							g[x]=g[i];
-							h[x]=h[i]+1;
-						}else {
-							g[x]=g[i]+1;
-							h[x]=h[i];
-						}
-					}
-				}
-				gone_to[x]=true;
-			}
-			for(int i=0;i<m;i++) {
-				line=br.readLine();
-				temp=line.split(" ");
-				int start=Integer.parseInt(temp[0])-1;
-				int end=Integer.parseInt(temp[1])-1;
-				char preferred=temp[2].charAt(0);
-
-				if(preferred=='H') {
-					if(Math.abs(h[start]-h[end])>=1 || breeds[start]=='H' || breeds[end]=='H') {
-						bw.write("1");
-					}else {
-						bw.write("0");
-					}
-				}else {
-					if(Math.abs(g[start]-g[end])>=1 || breeds[start]=='G' || breeds[end]=='G') {
-						bw.write("1");
-					}else {
-						bw.write("0");
-					}
-				}
-			}
-
-			bw.write("\n");
-			bw.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void Milk_Visits_Groups() {
-		try {
-			BufferedReader br=new BufferedReader(new FileReader("milkvisits.in"));
-			BufferedWriter bw=new BufferedWriter(new FileWriter("milkvisits.out"));
-			String line=br.readLine();
-			String[] temp=line.split(" ");
-			int n=Integer.parseInt(temp[0]);
-			int m=Integer.parseInt(temp[1]);
-			line=br.readLine();
-			char[] breeds=line.toCharArray();
-			ArrayList<Integer>[] paths=new ArrayList[n];
-			for(int i=0;i<n;i++) {
-				paths[i]=new ArrayList<>();
-			}
-			for(int i=0;i<n-1;i++) {
-				line=br.readLine();
-				temp=line.split(" ");
-				int first=Integer.parseInt(temp[0])-1;
-				int second=Integer.parseInt(temp[1])-1;
-				paths[first].add(second);
-				paths[second].add(first);
-			}
-
-			ArrayList<ArrayList<Integer>> groups=new ArrayList<>();
-			int[] which_group=new int[n];
-			boolean[] gone_to=new boolean[n];
-			for(int i=0;i<n;i++) {
-				if(gone_to[i]==false) {
-					ArrayDeque<Integer> queue=new ArrayDeque<>();
-					queue.add(i);
-					ArrayList<Integer> group=new ArrayList<>();
-					group.add(i);
-					gone_to[i]=false;
-					while(queue.isEmpty()==false) {
-						int x=queue.pop();
-						gone_to[x]=true;
-						for(int j : paths[x]) {
-							if(gone_to[j]==false && breeds[j]==breeds[x]) {
-								queue.add(j);
-								group.add(j);
-								gone_to[j]=true;
-							}
-						}
-					}
-					groups.add(group);
-				}
-			}
-			for(int i=0;i<groups.size();i++) {
-				for(int j : groups.get(i)) {
-					which_group[j]=i;
-				}
-			}
-
-			for(int i=0;i<m;i++) {
-				line=br.readLine();
-				temp=line.split(" ");
-				int start=Integer.parseInt(temp[0])-1;
-				int end=Integer.parseInt(temp[1])-1;
-				char preferred=temp[2].charAt(0);
-				if(which_group[start]==which_group[end]) {
-					if(breeds[start]==preferred || breeds[end]==preferred) {
-						bw.write("1");
-					}else {
-						bw.write("0");
-					}
-				}else {
-					bw.write("1");
-				}
-
-			}
-
-			bw.write("\n");
-			bw.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void Meetings() {
-		try {
-			BufferedReader br=new BufferedReader(new FileReader("meetings.in"));
-			BufferedWriter bw=new BufferedWriter(new FileWriter("meetings.out"));
-			String line=br.readLine();
-			String[] temp=line.split(" ");
-			int n=Integer.parseInt(temp[0]);
-			int l=Integer.parseInt(temp[1]);
-			int[] weight=new int[n];
-			int[] position=new int[n];
-			boolean[] direction=new boolean[n];
-			for(int i=0;i<n;i++) {
-				line=br.readLine();
-				temp=line.split(" ");
-				weight[i]=Integer.parseInt(temp[0]);
-				position[i]=Integer.parseInt(temp[1]);
-				
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Milk_Visits_Groups();
+		MooBuzz();
 	}
 
 }
