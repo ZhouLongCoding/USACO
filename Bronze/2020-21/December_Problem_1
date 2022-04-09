@@ -26,9 +26,9 @@ public class Dec2020_Bronze_P1 {
 	}
 
 	public static void main(String[] args) {
-		String[] output=dumb_In_A_Rut();
-		for(int i=0;i<output.length;i++) {
-			System.out.println(output[i]);
+		int[] output=ABCs();
+		for(int i=0;i<output.length;i++){
+			System.out.println(output[i]+" ");
 		}
 	}
 
