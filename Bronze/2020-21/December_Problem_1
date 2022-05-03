@@ -1,3 +1,5 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1059
+
 import java.util.*;
 public class Dec2020_Bronze_P1 {
 
