@@ -1,3 +1,5 @@
+// 	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=895
+
 //	We can solve this problem by finding every ice cream blob and then picking the one with the 
 //	largest area and then the smallest perimeter among them. 
 
