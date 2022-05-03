@@ -1,5 +1,11 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1059
 
+//	Note that the smallest integer must be equal to A because A is always either the smallest number
+//	or equal to the smallest number because A<=B<=C. Similarily, the second smallest number must be B.
+//	Now, note that C must be either the 3rd or 4th smallest number because A+C, B+C and A+B+C are all larger than C.
+//	If the 3rd smallest number is not equal A+B, it must be C. Otherwise, the 4th number must be equal to C. So,
+//	we can easily find A, B and C by using a bit of logic.
+
 import java.util.*;
 public class Dec2020_Bronze_P1 {
 
