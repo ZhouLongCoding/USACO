@@ -1,3 +1,12 @@
+// 	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=894
+
+//	This problem is the equivalent of colouring a tree with the least amount of colours 
+//	such that same colours are separated by at least 3 edges. Note that if a node has
+//	x neighbors, it requires at least x+1 distinct colours. So, if the maximum degree 
+//	is X, we require at least X+1 colours. It is also possible to colour any tree with 
+//	only X+1 colours so our answer is always X+1.
+
+//	So, all we have to do is find the maximum degree, add one and then output the result.
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -5,7 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Jan2019_Silver_P1 {
-	
+
 	public static void Grass_Planting() {
 		try {
 			BufferedReader br=new BufferedReader(new FileReader("planting.in"));
@@ -35,7 +44,7 @@ public class Jan2019_Silver_P1 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Grass_Planting();
