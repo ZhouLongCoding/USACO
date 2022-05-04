@@ -1,3 +1,9 @@
+
+//	Note that Bessie can only increase her H-index by a maximum of 1. Let her current H-index be X.
+//	For her H-index to become X+1, she needs to have X+1 papers with X+1 citations. So, she must currently have at
+//	least X+1 papers that have at least X citations. Then, L must be large enough for her to cite enough papers such that
+//	she gets X+1 papers with X+1 citations. If all these requirments are met, output X+1. Otherwise, output X.
+
 import java.util.*;
 public class Bronze2021Open {
 
