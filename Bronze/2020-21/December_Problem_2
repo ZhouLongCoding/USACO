@@ -1,4 +1,4 @@
-//
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1060
 
 //	There are only 100 flowers which means that it is possible to just brute force this problem 
 //	by just finding all photos and then determining whether or not an average flower exists.
