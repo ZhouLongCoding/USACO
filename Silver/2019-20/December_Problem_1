@@ -1,3 +1,8 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=966
+
+//	This problem requires little to no computing power if you use modular arithmatic. Notice that every 8 numbers
+//	or 15 words, the cycle resets. So, the answer is just the floor of n/8 multiplied by 15 and then adding a constant depending
+//	on the number mod 8. So, I was able to do this question in O(1)
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
