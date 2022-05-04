@@ -1,3 +1,9 @@
+//
+
+//	There are only 100 flowers which means that it is possible to just brute force this problem 
+//	by just finding all photos and then determining whether or not an average flower exists.
+//	This is a rather inefficient algorithm with O(N^3) but it is sufficient to pass all cases.
+
 import java.util.*;
 public class Dec2020_Bronze_P2 {
 
