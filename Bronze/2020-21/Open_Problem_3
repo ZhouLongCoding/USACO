@@ -1,5 +1,7 @@
+
+
 import java.util.*;
-public class Bronze2021Open {
+public class Open2021_Bronze_P3 {
   public static int Acowdemia_3() {
 		Scanner obj=new Scanner(System.in);
 		String line=obj.nextLine();
