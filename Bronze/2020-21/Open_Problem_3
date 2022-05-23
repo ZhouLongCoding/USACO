@@ -1,4 +1,8 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1133
 
+//	With this question, we can go through all the grass tiles. If there is less than 2 cows, then move on to the next one.
+//	If there is exactly 2 cows, then we can return the 2 cows so they are added to a list. Finally, if there are 3 or 4
+//	cows, just add one to the counter. Then, after going through all the grass, we can return the answer.
 
 import java.util.*;
 public class Open2021_Bronze_P3 {
