@@ -1,3 +1,8 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1157
+
+//	With this problem, I used casework. We have 3 cases: 1 turn, 2 turns and 3 turns. Solving each individual case is much easier,
+//	and all that is required is a few for loops per case. Then, just add up all the cases to get the final result.
+
 import java.util.*;
 public class Dec2021_Bronze_P3 {
 	public static int[] Walking_Home() {
