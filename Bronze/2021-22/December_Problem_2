@@ -6,8 +6,7 @@ import java.util.*;
 public class Dec2021_Bronze_P2 {
 
 	public static int Air_Cow() {
-		//		ALL 10!
-		//		Variable definition starts here
+
 		Scanner obj=new Scanner(System.in);
 		String line=obj.nextLine();
 		int cows=Integer.parseInt(line);
@@ -27,7 +26,7 @@ public class Dec2021_Bronze_P2 {
 		for(int i=0;i<current_temp.length;i++) {
 			difference[i]=optimal_temp[i]-current_temp[i];
 		}
-		//		Code starts here
+
 
 		return temp_changes(difference);
 
