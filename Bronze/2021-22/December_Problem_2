@@ -1,6 +1,10 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1156
 
-//	
+//	We can start by making an integer array to store the differences between the current and target temperatures.
+//	Now, we can run a loop through the differences array. If differences[i] is positive, then we can find the largest
+//	j such that all numbers in the differences array between i and j are positive. Now, we can subtract 1. If differences[i]
+//	is negative, we can do the same thing but add 1 to as many negative numbers as possible. We can use this algorithm until
+//	the entire array is at 0 and then we can print out the answer.
 
 import java.util.*;
 public class Dec2021_Bronze_P2 {
