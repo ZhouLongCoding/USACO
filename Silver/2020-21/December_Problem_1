@@ -1,3 +1,11 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1062
+
+//	Note that we can replace an infected cow travelling to an infected farm with a superspreader event. 
+//	So, we only ever need n-1 infected cows travelling because there are n farms and 1 is infected at the start.
+//	So, we just have to calculate how many superspreader events there needs to be and then add n-1 to that. 
+//	Now, root the tree at 1 and let i be the root of some subtree. At some point there will be a single infected
+//	cow in i and none in its subtree. Now, if i has n children, we need to do superspreader events until there are at least n+1 infected cows.
+//	So, we can use a for loop and calculate how many superspreader events there is required in each farm with at least 2 connections.
 
 import java.util.*;
 import java.io.*;
