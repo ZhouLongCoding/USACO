@@ -1,3 +1,12 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=990
+
+//	Let x be the minimum amount of berries in a basket that elsie recieves. We can also assume that every 
+//	basket that elsie recieves has x berries because there is no point in having more than x berries in a basket
+//	as that does not help bessie. Now, if we know x, we can find the maximum amount of berries that bessie can get 
+//	by filling k/2 baskets with x berries and then filling the rest of the baskets with the largest number below x.
+//	If we cannot fill k/2 berries with x berries, then our result is 0.
+//	Finally, because the numbers are small enough, we can simply try all x from 1 to the maximum amount of berries in a given tree 
+//	and then print the largest amount of berries that bessie gets.
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
