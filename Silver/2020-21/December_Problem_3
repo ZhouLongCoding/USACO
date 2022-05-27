@@ -1,6 +1,9 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1064
 
-//	
+//	First, we want to make a blame array to track the blame each cow has. Now, we can seperate the cows by the direction they're facing. 
+//	So, we get a list of "eastcows" and a list of "northcows". Now, we want to sort by their y and x indexes, respectively. Now, we can 
+//	search through all eastcows and see if or when they collide with the northcows. Once a collision if found, we "stop" the cow that arrives 
+//	later and add the blame to the cow that stopped them. This algorithm ensures that we find all colisions and do not overcount.
 
 import java.util.*;
 import java.io.*;
