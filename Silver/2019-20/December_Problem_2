@@ -1,6 +1,12 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=968
 
-//	
+//	Define a "Group" of farms to be farms that are all of the same type and are all interlinked together.
+//	In other words, when you travel between farms in a group, you will only pass by one of the two types.
+//	Now, we can find all groups using a simple search algorithm.
+
+//	If the start cow and end cow are in different groups, the path between them must go through both types of cow
+//	so Farmer John's friend will be happy. If they are in the same group, then we can check the type of the group
+//	and then return 1 or 0 accordingly.
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
