@@ -1,3 +1,12 @@
+//	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1063
+
+//	We can first compress the coordinates into the range of [0, N-1]. 
+
+//	Note that there is only 1 cow per y coordinate. So, we can iterate through all pairs of cows and set them as the top and bottom
+//	which takes O(n^2). Let cow A have coordinates (x_a, y_a) and cow B have coordinates (x_b, y_b). Without loss of generality, let x_a>x_b. 
+//	If there are n cows with x-coordinate smaller than x_b and there are m cows with x-coordinate larger than x_a, then there are 
+//	(n+1)*(m+1) different rectangles with top and bottom of y_a and y_b. We can find n and m in O(1) time by using a 2-D prefix-array
+//	to count how many cows there are in a region. So, the resulting algorithm is O(n^2) which is fast enough to clear all cases.
 
 import java.util.*;
 import java.io.*;
