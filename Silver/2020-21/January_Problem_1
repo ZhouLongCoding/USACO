@@ -1,1 +1,378 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1086
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.Arrays;
+
+public class Silver2021Janurary {
+
+	public static int[] No_Time_To_Paint() {
+		Scanner obj=new Scanner(System.in);
+		int n=obj.nextInt();
+		int q=obj.nextInt();
+		int[] strokes=new int[q];
+		obj.nextLine();
+		String colours=obj.nextLine();
+		char[] colors=colours.toCharArray();
+
+		for(int i=0;i<q;i++) {
+			int a=obj.nextInt()-1;
+			int b=obj.nextInt()-1;
+			strokes[i]+=min_brushes(a,b,colors);
+		}
+
+
+		return strokes;
+	}
+
+	public static int min_brushes(int a,int b,char[] input) {
+		char[] zerotoa=Arrays.copyOfRange(input, 0, a);
+		char[] atob=Arrays.copyOfRange(input, b+1, input.length);
+		int output=0;
+		output+=min_brushes_last_seen(zerotoa);
+		output+=min_brushes_last_seen(atob);
+		return output;
+	}
+
+	public static int min_brushes_last_seen(char[] input) {
+		int brushes=0;
+		int[] last_seen=new int[26];
+
+		for(int i=0;i<last_seen.length;i++) {
+			last_seen[i]=-1;
+		}
+
+		for(int i=0;i<input.length;i++) {
+			int letter=input[i]-65;
+			if(last_seen[letter]==-1) {
+				brushes++;
+			}else {
+				for(int j=0;j<letter;j++) {
+					if(last_seen[j]>last_seen[letter]) {
+						brushes++;
+						break;
+					}
+				}
+			}
+
+			last_seen[letter]=i;
+		}
+
+		return brushes;
+	}
+
+	public static int min_brushes_array(char[] input) {
+		int brushes=0;
+		for(int i=0;i<input.length;i++) {
+			while(input[i]>64) {
+				int j=i;
+				int min=Integer.MAX_VALUE;
+				while(input[j]>64) {
+					if(min>input[j]-64) {
+						min=input[j]-64;
+					}
+					j++;
+					if(j>=input.length) {
+						break;
+					}
+				}
+				for(int k=i;k<j;k++) {
+					input[k]-=min;
+				}
+				brushes++;
+			}
+		}
+		return brushes;
+	}
+	public static int min_brushes_array_fast(char[] input) {
+		int brushes=0;
+		for(int i=0;i<input.length;i++) {
+			int j=i;
+			int temp=input[i];
+			if(temp!=0) {
+				while(input[j]>=temp) {
+					if(input[j]==temp) {
+						input[j]-=temp;
+					}
+					j++;
+					if(j>=input.length) {
+						break;
+					}
+				}
+				brushes++;
+			}
+		}
+		return brushes;
+	}
+
+	public static int min_brushes_n2(char[] input) {
+		int brushes=0;
+		int minimum=Integer.MAX_VALUE;
+		while(minimum!=100) {
+			minimum=100;
+			int minimum_placement=-1;
+			for(int i=0;i<input.length;i++) {
+				if(input[i]-64<minimum && input[i]-64>0) {
+					minimum=input[i]-64;
+					minimum_placement=i;
+				}
+			}
+			if(minimum_placement!=-1) {
+				int i=minimum_placement;
+				while(input[i]>64) {
+					input[i]-=minimum;
+					i++;
+					if(i>=input.length) {
+						break;
+					}
+				}
+				i=minimum_placement;
+				while(input[i]>64) {
+					input[i]-=minimum;
+					i--;
+					if(i<0) {
+						break;
+					}
+				}
+				brushes++;
+			}else {
+				break;
+			}
+
+		}
+
+		return brushes;
+	}
+
+	public static int[] No_Time_To_Paint_Prefix() {
+		Scanner obj=new Scanner(System.in);
+		int n=obj.nextInt();
+		int[] one_n=new int[n];
+		int[] n_one=new int[n];
+		int q=obj.nextInt();
+		int[] strokes=new int[q];
+		obj.nextLine();
+		String colours=obj.nextLine();
+		char[] colors=colours.toCharArray();
+		prefix_filler(one_n,n_one,colors);
+
+		for(int i=0;i<q;i++) {
+			int a=obj.nextInt()-2;
+			int b=obj.nextInt();
+			if(a>=0) {
+				strokes[i]+=one_n[a];
+			}
+			if(b<n) {
+				strokes[i]+=n_one[b];
+			}
+		}
+
+
+		return strokes;
+	}
+
+	public static void prefix_filler(int[] one_n,int[] n_one, char[] input) {
+		int brushes=0;
+		int[] last_seen=new int[26];
+		for(int i=0;i<last_seen.length;i++) {
+			last_seen[i]=-1;
+		}
+		for(int i=0;i<input.length;i++) {
+			int letter=input[i]-65;
+			if(last_seen[letter]==-1) {
+				brushes++;
+			}else {
+				for(int j=0;j<letter;j++) {
+					if(last_seen[j]>last_seen[letter]) {
+						brushes++;
+						break;
+					}
+				}
+			}
+			one_n[i]=brushes;
+			last_seen[letter]=i;
+		}
+		brushes=0;
+		for(int i=0;i<last_seen.length;i++) {
+			last_seen[i]=input.length;
+		}
+		for(int i=input.length-1;i>=0;i--) {
+			int letter=input[i]-65;
+			if(last_seen[letter]==input.length) {
+				brushes++;
+			}else {
+				for(int j=0;j<letter;j++) {
+					if(last_seen[j]<last_seen[letter]) {
+						brushes++;
+						break;
+					}
+				}
+			}
+			n_one[i]=brushes;
+			last_seen[letter]=i;
+		}
+	}
+
+
+	public static int Spaced_out() {
+		int row=0;
+		int column=0;
+		Scanner obj=new Scanner(System.in);
+		String line=obj.nextLine();
+		int n=Integer.parseInt(line);
+		int[][] beauty_array=new int[n][n];
+		for(int i=0;i<n;i++) {
+			line=obj.nextLine();
+			String[] temp=line.split(" ");
+			for(int j=0;j<temp.length;j++) {
+				beauty_array[i][j]=Integer.parseInt(temp[j]);
+			}
+		}
+
+		row=row(beauty_array);
+		column=column(beauty_array);
+
+		return Math.max(row, column);
+	}
+
+	public static int row(int[][] beauty_array) {
+		int output=0;
+		int n=beauty_array.length;
+		for(int i=0;i<n;i++) {
+			int cow=0;
+			int blank=0;
+			for(int j=0;j<n;j++) {
+				if(j%2==0) {
+					cow+=beauty_array[i][j];
+				}else {
+					blank+=beauty_array[i][j];
+				}
+			}
+			output+=Math.max(cow, blank);
+		}
+
+		return output;
+	}
+
+	public static int column(int[][] beauty_array) {
+		int output=0;
+		int n=beauty_array.length;
+		for(int i=0;i<n;i++) {
+			int cow=0;
+			int blank=0;
+			for(int j=0;j<n;j++) {
+				if(j%2==0) {
+					cow+=beauty_array[j][i];
+				}else {
+					blank+=beauty_array[j][i];
+				}
+			}
+			output+=Math.max(cow, blank);
+		}
+
+		return output;
+	}
+
+	public static int[] Dance_Mooves() {
+		try{
+			BufferedReader obj=new BufferedReader(new InputStreamReader(System.in));
+
+			String line=obj.readLine();
+			String[] temp=line.split(" ");
+			int n=Integer.parseInt(temp[0]);
+			int k=Integer.parseInt(temp[1]);
+			int[] a=new int[k];
+			int[] b=new int[k];
+			for(int i=0;i<k;i++) {
+				line=obj.readLine();
+				temp=line.split(" ");
+				a[i]=Integer.parseInt(temp[0])-1;
+				b[i]=Integer.parseInt(temp[1])-1;		
+			}
+			ArrayList<Integer>[] places_went=new ArrayList[n];
+			for(int i=0;i<n;i++) {
+				places_went[i]=new ArrayList<Integer>();
+			}
+			ArrayList<ArrayList<Integer>> circles=new ArrayList<>();
+			Circle_Maker(n,circles,a,b,places_went);
+			int[] output=Circle_Counter(circles,n,places_went);
+			return output;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		int[] output=new int[0];
+		return output;
+	}
+
+	public static void Circle_Maker(int n,ArrayList<ArrayList<Integer>> circles,int[] a, int[] b, ArrayList<Integer>[] places_went){
+		int k=a.length;
+		int[] cows=new int[n];
+		for(int i=0;i<n;i++) {
+			cows[i]=i;
+			places_went[i].add(i);
+		}
+		for(int i=0;i<k;i++) {
+			places_went[cows[a[i]]].add(b[i]);
+			places_went[cows[b[i]]].add(a[i]);
+
+			int temp=cows[a[i]];
+			cows[a[i]]=cows[b[i]];
+			cows[b[i]]=temp;
+		}
+		int i=0;
+		while(i<n) {
+			if(cows[i]!=-1) {
+				ArrayList<Integer> circle=new ArrayList<>();
+				if(cows[cows[i]]!=-1) {
+					circle.add(cows[i]);
+					int j=cows[i];
+					int l=i;
+					while(j>=0 && j<n) {
+						if(cows[j]!=-1 && cows[j]!=cows[i]) {
+							circle.add(cows[j]);
+
+
+							cows[l]=-1;
+							l=j;
+							j=cows[j];
+						}else {
+							break;
+						}
+					}
+				}
+				circles.add(circle);
+				cows[i]=-1;
+			}
+			i++;
+		}
+	}
+
+	public static int[] Circle_Counter(ArrayList<ArrayList<Integer>> circles,int n, ArrayList<Integer>[] places_went) {
+		int[] output=new int[n];
+		for(int i=0;i<circles.size();i++) {
+			HashSet<Integer> places=new HashSet<>();
+			for(int j : circles.get(i)) {
+				for(int k : places_went[j]) {
+					places.add(k);
+				}
+			}
+			for(int j : circles.get(i)) {
+				output[j]=places.size();
+			}
+		}
+
+		return output;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] output=Dance_Mooves();
+		for(int i=0;i<output.length;i++) {
+			System.out.println(output[i]);
+		}
+	}
+}
+
+
