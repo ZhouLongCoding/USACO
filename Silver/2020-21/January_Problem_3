@@ -1,11 +1,13 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1088
 
+//	
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.Arrays;
 
-public class Silver2021Janurary {
+public class Jan2021_Silver_P3 {
 
 	public static int Spaced_out() {
 		int row=0;
