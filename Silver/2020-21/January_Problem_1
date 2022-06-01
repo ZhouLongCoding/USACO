@@ -1,5 +1,10 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1086
 
+//	Let cow x end up in cow y's spot after k swaps. Let cow x and cow y be defined as on the same cycle.
+//	If cow y ended up in cow z's spot after k swaps, then cow y and z are on the same cycle so x and z are on the same cycle.
+//	Now, note that the answers for all cows on a cycle are the same. This is because everything repeats every k moves. So, x
+//	would go to y after k moves, and then would go to z after 2k moves. This cycle keeps repeating until they make a full loop back.
+//	So, we just have to find all the cycles and then for each cow output the amount of cows in its cycle.
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
