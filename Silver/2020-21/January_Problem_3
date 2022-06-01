@@ -1,6 +1,13 @@
 //	The problem can be found at http://www.usaco.org/index.php?page=viewproblem2&cpid=1088
 
-//	
+//	First, note that either every row or every column will alternate between having a cow or not having a cow.
+//	We can prove this by doing a little casework. If there does not exist 2 cows such that they are next to each other,
+//	then the conditions are obviously met. Otherwise, the two cows next to each other fix the columns they are in. 
+//	Then, for all the rest of the columns, we must alternate between having a cow and not having a cow because otherwise
+//	there will be 2x2 squares that do not satisfy the conditions.
+
+//	Now, we can start from either the rows or the columns. There are only 2 ways for each row/column (whichever one is alternating) 
+//	so we just have to pick the larger one. Finally, we just pick the larger answer and then output it.
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
